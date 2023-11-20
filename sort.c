@@ -3,6 +3,7 @@
 #include "sort.h"
 #include "typedef.h"
 
+// Function to partition the array for quicksort
 static size_t partition(void *arr, size_t low, size_t high, SortGetFunc get, SortSetFunc set, SortCmpFunc cmp, SortSwapFunc swap) {
     void *pivot = NULL;
     get(arr, high, &pivot);
@@ -25,7 +26,9 @@ static size_t partition(void *arr, size_t low, size_t high, SortGetFunc get, Sor
     return i;
 }
 
+// Function to perform quicksort on an array
 void quick_sort(void *arr, size_t low, size_t high, SortGetFunc get, SortSetFunc set, SortCmpFunc cmp, SortSwapFunc swap) {
+    // Allocate memory for the stack used in the iterative implementation of quicksort
     size_t* stack = (size_t*)STL_MALLOC((high - low + 1) * sizeof(size_t));
     int top = -1;
 
@@ -47,9 +50,12 @@ void quick_sort(void *arr, size_t low, size_t high, SortGetFunc get, SortSetFunc
             stack[++top] = high;
         }
     }
+    
+    // Free the allocated stack memory
     STL_FREE(stack);
 }
 
+// Function to perform binary search on a sorted array
 int binary_search(void *arr, size_t low, size_t high, void *data, SortGetFunc get, SortCmpFunc cmp) {
     while (low <= high) {
         size_t mid = low + (high - low) / 2;

@@ -1,12 +1,14 @@
 #include <stdlib.h>
 #include "list.h"
 
+// Destroy data using the provided data destruction function
 static void list_destroy_data(List *self, void *data) {
     if (self->data_destroy != NULL) {
         self->data_destroy(self->data_destroy_ctx, data);
     }
 }
 
+// Create a new list node with the given data
 static struct ListNode *list_create_node(List *self, void *data) {
     struct ListNode *node = STL_MALLOC(sizeof(struct ListNode));
     if (node != NULL) {
@@ -17,6 +19,7 @@ static struct ListNode *list_create_node(List *self, void *data) {
     return node;
 }
 
+// Destroy a list node, including data destruction
 static void list_destroy_node(List *self, struct ListNode *node) {
     if (node != NULL) {
         node->next = NULL;
@@ -26,6 +29,7 @@ static void list_destroy_node(List *self, struct ListNode *node) {
     }
 }
 
+// Create a new list
 List *list_create(DataDestroyFunc data_destroy, void *ctx) {
     List *self = STL_MALLOC(sizeof(List));
     if (self != NULL) {
@@ -37,6 +41,7 @@ List *list_create(DataDestroyFunc data_destroy, void *ctx) {
     return self;
 }
 
+// Get a node at the specified index, with an option to return the last node if index exceeds the list size
 static struct ListNode *list_get_node(List *self, size_t index, int fail_return_last) {
     struct ListNode *iter = NULL;
     return_val_if_fail(self != NULL, NULL);
@@ -53,6 +58,7 @@ static struct ListNode *list_get_node(List *self, size_t index, int fail_return_
     return iter;
 }
 
+// Insert data at the specified index
 int list_insert(List *self, size_t index, void *data) {
     int ret = OK;
     struct ListNode *node = NULL;
@@ -87,14 +93,17 @@ int list_insert(List *self, size_t index, void *data) {
     return ret;
 }
 
+// Prepend data at the beginning of the list
 int list_prepend(List *self, void *data) {
     return list_insert(self, 0, data);
 }
 
+// Append data at the end of the list
 int list_append(List *self, void *data) {
     return list_insert(self, -1, data);
 }
 
+// Delete the node at the specified index
 int list_delete(List *self, size_t index) {
     struct ListNode *cursor = NULL;
 
@@ -118,6 +127,7 @@ int list_delete(List *self, size_t index) {
     return OK;
 }
 
+// Get data from the node at the specified index
 int list_get_by_index(List *self, size_t index, void **data) {
     struct ListNode *cursor = NULL;
     return_val_if_fail(self != NULL && data != NULL, ERR_NIL);
@@ -129,6 +139,7 @@ int list_get_by_index(List *self, size_t index, void **data) {
     return cursor != NULL ? 0 : 1;
 }
 
+// Set data for the node at the specified index
 int list_set_by_index(List *self, size_t index, void *data) {
     struct ListNode *cursor = NULL;
     return_val_if_fail(self != NULL, ERR_NIL);
@@ -140,10 +151,12 @@ int list_set_by_index(List *self, size_t index, void *data) {
     return cursor != NULL ? OK : ERR_NIL;
 }
 
+// Get the length of the list (number of nodes)
 size_t list_length(List *self) {
     return self->size;
 }
 
+// Iterate over the list and perform a specified operation on each node
 int list_foreach(List *self, DataVisitFunc visit, void *ctx) {
     int ret = 0;
     struct ListNode *iter = NULL;
@@ -158,6 +171,7 @@ int list_foreach(List *self, DataVisitFunc visit, void *ctx) {
     return ret;
 }
 
+// Find the position of a node that satisfies a condition
 int list_find(List *self, DataCompareFunc cmp, void *ctx) {
     int ret = -1;
     int i = 0;
@@ -176,6 +190,7 @@ int list_find(List *self, DataCompareFunc cmp, void *ctx) {
     return ret;
 }
 
+// Find data in a node that satisfies a condition
 int list_find_data(List *self, DataCompareFunc cmp, void *ctx, void** data) {
     int ret = -1;
     int i = 0;
@@ -197,6 +212,7 @@ int list_find_data(List *self, DataCompareFunc cmp, void *ctx, void** data) {
     return ret;
 }
 
+// Destroy the linked list
 void list_destroy(List *self) {
     struct ListNode *iter = NULL;
     struct ListNode *next = NULL;
