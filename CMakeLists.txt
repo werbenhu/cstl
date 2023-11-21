@@ -9,4 +9,4 @@ add_executable(cstl sort.c
         array.c
         list.c
         map.c
-        array_test.c)
+        map_example.c)

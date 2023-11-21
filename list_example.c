@@ -3,8 +3,6 @@
 #include <stdlib.h>
 #include "list.h"
 
-int malloc_n = 0;
-
 int cmp(void *i, void *j) {
     return (int)(*(size_t *) i - *(size_t *) j);
 }
@@ -48,7 +46,5 @@ int main() {
     list_delete(list, 0);
     printf("size:%zu\n", list_length(list));
     list_destroy(list);
-
-    printf("malloc_n:%d\n", malloc_n);
     return 0;
 }
