@@ -1,6 +1,10 @@
 
 # Common Datastructure Library for **C language**
 
+<div>
+<a href="https://github.com/werbenhu/cstl/actions"><img src="https://img.shields.io/github/actions/workflow/status/werbenhu/cstl/cmake-single-platform.yml?branch=master&label=Build"></a>
+</div>
+
 ### Dynamic Array
 
 ```c
