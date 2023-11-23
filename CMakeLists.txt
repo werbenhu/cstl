@@ -9,4 +9,6 @@ add_executable(cstl sort.c
         array.c
         list.c
         map.c
+        stack.c
+        queue.c
         map_example.c)

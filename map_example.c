@@ -1,8 +1,8 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
-#include "map.h"
 #include <string.h>
+#include <time.h>
+#include "map.h"
 
 // Comparison function for keys
 int cmp(void *i, void *j) {

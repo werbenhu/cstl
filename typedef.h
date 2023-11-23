@@ -23,6 +23,7 @@ typedef int  (*DataVisitFunc)(void* ctx, size_t index, void* data);
 typedef int (*DataSwapFunc)(void* ctx, size_t i, size_t j);
 
 // Memory leak checking macros
+// #define STL_MEM_LEAK_CHECK
 #ifdef STL_MEM_LEAK_CHECK
 extern int malloc_n;
 

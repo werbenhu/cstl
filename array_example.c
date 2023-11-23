@@ -1,15 +1,15 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
+#include <time.h>
 #include "array.h"
 
 // Comparison function for sorting
-int cmp(void *i, void *j) {
+int data_cmp(void *i, void *j) {
     return *(int*)i - *(int*)j;
 }
 
 // Swap function for sorting
-int swap(void *arr, size_t i, size_t j) {
+int data_swap(void *arr, size_t i, size_t j) {
     void *i_ptr = NULL;
     void *j_ptr = NULL;
 
@@ -56,7 +56,7 @@ int main() {
     array_foreach(array, data_visit, NULL);
 
     // Sort the array using the defined comparison and swap functions
-    array_sort(array, cmp, swap);
+    array_sort(array, data_cmp, data_swap);
 
     // Destroy the array, freeing allocated memory
     array_destroy(array);

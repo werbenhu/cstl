@@ -1,28 +1,10 @@
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
 #include "list.h"
 
 // Comparison function for sorting
-int cmp(void *i, void *j) {
+int data_cmp(void *i, void *j) {
     return (int)(*(size_t *) i - *(size_t *) j);
-}
-
-// Swap function for sorting
-int swap(void *arr, size_t i, size_t j) {
-    void *i_ptr = NULL;
-    void *j_ptr = NULL;
-
-    // Get elements at indices i and j
-    list_get_by_index(arr, i, &i_ptr);
-    list_get_by_index(arr, j, &j_ptr);
-
-    // Swap the elements
-    void *temp = i_ptr;
-    list_set_by_index(arr, i, j_ptr);
-    list_set_by_index(arr, j, temp);
-
-    return OK;
 }
 
 // Function to destroy data during list destruction
