@@ -9,17 +9,17 @@
 
 ```c
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
+#include <time.h>
 #include "array.h"
 
 // Comparison function for sorting
-int cmp(void *i, void *j) {
+int data_cmp(void *i, void *j) {
     return *(int*)i - *(int*)j;
 }
 
 // Swap function for sorting
-int swap(void *arr, size_t i, size_t j) {
+int data_swap(void *arr, size_t i, size_t j) {
     void *i_ptr = NULL;
     void *j_ptr = NULL;
 
@@ -66,7 +66,7 @@ int main() {
     array_foreach(array, data_visit, NULL);
 
     // Sort the array using the defined comparison and swap functions
-    array_sort(array, cmp, swap);
+    array_sort(array, data_cmp, data_swap);
 
     // Destroy the array, freeing allocated memory
     array_destroy(array);
@@ -79,30 +79,12 @@ int main() {
 
 ```c
 #include <stdio.h>
-#include <time.h>
 #include <stdlib.h>
 #include "list.h"
 
 // Comparison function for sorting
-int cmp(void *i, void *j) {
+int data_cmp(void *i, void *j) {
     return (int)(*(size_t *) i - *(size_t *) j);
-}
-
-// Swap function for sorting
-int swap(void *arr, size_t i, size_t j) {
-    void *i_ptr = NULL;
-    void *j_ptr = NULL;
-
-    // Get elements at indices i and j
-    list_get_by_index(arr, i, &i_ptr);
-    list_get_by_index(arr, j, &j_ptr);
-
-    // Swap the elements
-    void *temp = i_ptr;
-    list_set_by_index(arr, i, j_ptr);
-    list_set_by_index(arr, j, temp);
-
-    return OK;
 }
 
 // Function to destroy data during list destruction
@@ -265,7 +247,7 @@ int main() {
 #include <string.h>
 
 // Comparison function for keys
-int cmp(void *i, void *j) {
+int kv_cmp(void *i, void *j) {
     return strcmp((char *) i, (char *) j);
 }
 
@@ -314,7 +296,7 @@ int main() {
     // Example of getting a value by key
     char *k = "key11";
     void* val = NULL;
-    if (map_get(map, cmp, k, &val) != OK) {
+    if (map_get(map, kv_cmp, k, &val) != OK) {
         printf("can't find key:%s in map\n", k);
     }
 
@@ -322,7 +304,7 @@ int main() {
     for (int i = 0; i < 6; i++) {
         char key[16] = {0};
         snprintf(key, 16, "key%d", i);
-        map_delete(map, cmp, key);
+        map_delete(map, kv_cmp, key);
     }
 
     // Example of traversing the map and printing key-value pairs

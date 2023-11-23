@@ -1,11 +1,11 @@
 #include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
 #include <time.h>
+#include <stdlib.h>
 #include "map.h"
+#include <string.h>
 
 // Comparison function for keys
-int cmp(void *i, void *j) {
+int kv_cmp(void *i, void *j) {
     return strcmp((char *) i, (char *) j);
 }
 
@@ -54,7 +54,7 @@ int main() {
     // Example of getting a value by key
     char *k = "key11";
     void* val = NULL;
-    if (map_get(map, cmp, k, &val) != OK) {
+    if (map_get(map, kv_cmp, k, &val) != OK) {
         printf("can't find key:%s in map\n", k);
     }
 
@@ -62,7 +62,7 @@ int main() {
     for (int i = 0; i < 6; i++) {
         char key[16] = {0};
         snprintf(key, 16, "key%d", i);
-        map_delete(map, cmp, key);
+        map_delete(map, kv_cmp, key);
     }
 
     // Example of traversing the map and printing key-value pairs
