@@ -134,11 +134,6 @@ int main() {
 #include <stdlib.h>
 #include "stack.h"
 
-// Comparison function for sorting
-int data_cmp(void *i, void *j) {
-    return (int)(*(size_t *) i - *(size_t *) j);
-}
-
 // Function to destroy data during stack destruction
 void data_destroy(void* ctx, void* data) {
     STL_FREE(data);
@@ -186,11 +181,6 @@ int main() {
 #include <stdio.h>
 #include <stdlib.h>
 #include "queue.h"
-
-// Comparison function for sorting data in the queue
-int data_cmp(void *i, void *j) {
-    return (int)(*(size_t *) i - *(size_t *) j);
-}
 
 // Function to destroy data during list destruction
 void data_destroy(void* ctx, void* data) {
