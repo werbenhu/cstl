@@ -3,7 +3,7 @@
 #include <time.h>
 #include "array.h"
 
-// Comparison function for sorting
+// Comparison function for sorting and locating the data.
 int data_cmp(void *i, void *j) {
     return *(int*)i - *(int*)j;
 }

@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "list.h"
 
-// Comparison function for sorting
+// Comparison function for locating the data.
 int data_cmp(void *i, void *j) {
     return (int)(*(size_t *) i - *(size_t *) j);
 }
