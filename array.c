@@ -133,7 +133,9 @@ int array_foreach(Array *self, DataVisitFunc visit, void *ctx) {
     return_val_if_fail(self != NULL && visit != NULL, ERR_NIL);
 
     for (i = 0; i < self->size; i++) {
-        visit(ctx, i, self->data[i]);
+        if (!visit(ctx, i, self->data[i])) {
+            break;
+        };
     }
     return OK;
 }

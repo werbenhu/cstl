@@ -8,6 +8,11 @@
 #define ERR_NIL (-1)
 #define ERR_OOM (-2)
 
+typedef int BOOL;
+#define TRUE (1)
+#define FALSE (0)
+
+
 // Macro to check a condition and return a value if the condition is not met
 #define return_val_if_fail(p, ret) do {\
     if (!(p)) {\
@@ -19,7 +24,7 @@
 // Function pointer types for data handling
 typedef void (*DataDestroyFunc)(void* ctx, void* data);
 typedef int  (*DataCompareFunc)(void* ctx, void* data);
-typedef int  (*DataVisitFunc)(void* ctx, size_t index, void* data);
+typedef BOOL  (*DataVisitFunc)(void* ctx, size_t index, void* data);
 typedef int (*DataSwapFunc)(void* ctx, size_t i, size_t j);
 
 // Memory leak checking macros

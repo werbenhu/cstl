@@ -28,11 +28,16 @@ int list_insert(List *self, size_t index, void *data);
 // Prepend data at the beginning of the list
 int list_prepend(List *self, void *data);
 
+BOOL list_empty(List *self);
+
 // Append data at the end of the list
 int list_append(List *self, void *data);
 
 // Delete the node at the specified position
 int list_delete(List *self, size_t index);
+
+// Delete the node at the specified position
+int list_delete_not_destroy(List *self, size_t index);
 
 // Get data from the node at the specified position
 int list_get_by_index(List *self, size_t index, void **data);

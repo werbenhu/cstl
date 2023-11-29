@@ -16,9 +16,9 @@ void kv_destroy(void* ctx, void* key, void* value) {
 }
 
 // Key-Value pair visit function
-int kv_visit(void* ctx, void* key, void* value) {
-    printf("ctx:%s, key:%s, value:%s\n", (char*)ctx, (char*)key, (char*)value);
-    return OK;
+BOOL kv_visit(void* ctx, void* key, void* value) {
+    printf("key:%s, value:%s\n", (char*)key, (char*)value);
+    return TRUE;
 }
 
 // Hash function for keys

@@ -8,9 +8,9 @@ void data_destroy(void* ctx, void* data) {
 }
 
 // Function to visit data during stack traversal
-int data_visit(void* ctx, size_t index, void* data) {
+BOOL data_visit(void* ctx, size_t index, void* data) {
     printf("Visit index:%zu, Data:%d\n", index, *(int*)data);
-    return OK;
+    return TRUE;
 }
 
 int main() {

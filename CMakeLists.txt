@@ -5,7 +5,8 @@ set(CMAKE_C_STANDARD 11)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR})
 
-add_executable(cstl sort.c
+add_library(${PROJECT_NAME} STATIC 
+	sort.c
         array.c
         list.c
         map.c

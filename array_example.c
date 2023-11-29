@@ -30,9 +30,9 @@ void data_destroy(void* ctx, void* data) {
 }
 
 // Function to visit data during array traversal
-int data_visit(void* ctx, size_t index, void* data) {
+BOOL data_visit(void* ctx, size_t index, void* data) {
     printf("i:%zu, data:%d\n", index, *(int*)data);
-    return OK;
+    return TRUE;
 }
 
 int main() {

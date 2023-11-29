@@ -103,8 +103,39 @@ int list_append(List *self, void *data) {
     return list_insert(self, -1, data);
 }
 
+BOOL list_empty(List *self) {
+    return self == NULL || self->first == NULL;
+}
+
 // Delete the node at the specified index
 int list_delete(List *self, size_t index) {
+    struct ListNode *cursor = NULL;
+
+    return_val_if_fail(self != NULL, ERR_NIL);
+    cursor = list_get_node(self, index, 0);
+
+    if (cursor == NULL) {
+       return ERR_NIL;
+    }
+
+    if (cursor == self->first) {
+        self->first = cursor->next;
+    }
+
+    if (cursor->next != NULL) {
+        cursor->next->prev = cursor->prev;
+    }
+
+    if (cursor->prev != NULL) {
+        cursor->prev->next = cursor->next;
+    }
+    list_destroy_node(self, cursor);
+    self->size--;
+    return OK;
+}
+
+// Delete the node at the specified index
+int list_delete_not_destroy(List *self, size_t index) {
     struct ListNode *cursor = NULL;
 
     return_val_if_fail(self != NULL, ERR_NIL);
@@ -122,7 +153,7 @@ int list_delete(List *self, size_t index) {
     if (cursor->prev != NULL) {
         cursor->prev->next = cursor->next;
     }
-    list_destroy_node(self, cursor);
+    STL_FREE(cursor);
     self->size--;
     return OK;
 }
@@ -158,17 +189,17 @@ size_t list_length(List *self) {
 
 // Iterate over the list and perform a specified operation on each node
 int list_foreach(List *self, DataVisitFunc visit, void *ctx) {
-    int ret = 0;
     struct ListNode *iter = NULL;
     return_val_if_fail(self != NULL && visit != NULL, ERR_NIL);
     iter = self->first;
     size_t index = 0;
 
-    while (iter != NULL && ret != 4) {
+    BOOL ret = TRUE;
+    while (iter != NULL && ret) {
         ret = visit(ctx, index++, iter->data);
         iter = iter->next;
     }
-    return ret;
+    return OK;
 }
 
 // Find the position of a node that satisfies a condition
