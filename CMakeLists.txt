@@ -11,5 +11,4 @@ add_library(${PROJECT_NAME} STATIC
         list.c
         map.c
         stack.c
-        queue.c
-        map_example.c)
+        queue.c)
